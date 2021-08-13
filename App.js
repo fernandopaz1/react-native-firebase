@@ -22,9 +22,9 @@ function MyStack(){
   // pongo un Stack.Screen
   return (
     <Stack.Navigator>
+      <Stack.Screen name="CreateUserList" component={CreateUserScreen} />
       <Stack.Screen name="UserList" component={UserList} />
       <Stack.Screen name="UserDetailScreen" component={UserDetailScreen} />
-      <Stack.Screen name="CreateUserList" component={CreateUserScreen} />
     </Stack.Navigator>
 
   )
