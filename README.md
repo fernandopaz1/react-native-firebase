@@ -25,14 +25,15 @@ yarn run start
 
 👤 **Fernando Paz**
 
-* Website: https://www.linkedin.com/in/ferpaz/
-* Twitter: [@fernandopaz111](https://twitter.com/fernandopaz111)
-* Github: [@fernandopaz1](https://github.com/fernandopaz1)
-* LinkedIn: [@https:\/\/www.linkedin.com\/in\/ferpaz\/](https://linkedin.com/in/https:\/\/www.linkedin.com\/in\/ferpaz\/)
+-   Website: https://www.linkedin.com/in/ferpaz/
+-   Twitter: [@fernandopaz111](https://twitter.com/fernandopaz111)
+-   Github: [@fernandopaz1](https://github.com/fernandopaz1)
+-   LinkedIn: [@ferpaz](https://linkedin.com/in/ferpaz/)
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
 
-***
+---
+
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
