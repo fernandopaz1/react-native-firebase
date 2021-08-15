@@ -1,68 +1,92 @@
-import React, {useState} from 'react'
-import { View, Button, TextInput, ScrollView, StyleSheet,Text } from 'react-native'
-import firebase from '../database/firebase';
+import React, { useState } from "react";
+import {
+    View,
+    Button,
+    TextInput,
+    ScrollView,
+    StyleSheet,
+    Text,
+} from "react-native";
+import firebase from "../database/firebase";
 
 const CreateUserScreen = () => {
-    const [state, setState] = useState({
-        nombre: '',
-        email: '',
-        numeroCel: ''
-    });
+    const initalState = {
+        name: "",
+        email: "",
+        phone: "",
+    };
 
-    const cambiarEstado = (propiedad, valor) => {
-        setState({...state, [propiedad]: valor});
-    } 
-    console.log(state.nombre)
+    const [state, setState] = useState(initalState);
+
+    const handleChangeText = (value, name) => {
+        setState({ ...state, [name]: value });
+    };
+
     const addNewUser = async () => {
-        console.log(`Nombre ${state.nombre}`)
-        console.log(`email ${state.email}`)
-        console.log(`cel ${state.numeroCel}`)
-        console.log(state)
-        if(state.name === ''){
-            alert('Por favor ingrese un nombre')
-            return
+        console.log(`Nombre ${state.name}`);
+        console.log(`email ${state.email}`);
+        console.log(`cel ${state.phone}`);
+        console.log(state.name);
+        if (state.name === "") {
+            alert("Por favor ingrese un nombre");
+            return;
         }
-        if(state.email === ''){
-            alert('Por favor ingrese un email')
-            return
-        }else if(state.numeroCel === ''){
-            alert('Por favor ingrese un nuemero')
-            return
+        if (state.email === "") {
+            alert("Por favor ingrese un email");
+            return;
+        } else if (state.phone === "") {
+            alert("Por favor ingrese un nuemero");
+            return;
         }
 
         try {
-            await firebase.db.collection('Users').add({
+            await firebase.db.collection("Users").add({
                 name: state.name,
                 email: state.email,
-                phone: state.numeroCel,
-            })
+                phone: state.phone,
+            });
             // alert('Guardado')
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
-    
-    //    console.log(state)
-    }
 
-    return(
+        //    console.log(state)
+    };
+
+    return (
         <ScrollView style={styles.container}>
-            <View style = {styles.inputGroup}>
-                <TextInput placeholder="Nombre del usuario" onChange={(value) => setState({ nombre: value})}/>
+            <View style={styles.inputGroup}>
+                <TextInput
+                    placeholder="Nombre del usuario"
+                    onChange={(event) =>
+                        handleChangeText(event.nativeEvent.text, "name")
+                    }
+                />
             </View>
 
-            <View style = {styles.inputGroup}>
-                <TextInput placeholder="Email del usuario"  onChange={(value)=>setState({email: value})}/>
+            <View style={styles.inputGroup}>
+                <TextInput
+                    placeholder="Email del usuario"
+                    onChange={(event) =>
+                        handleChangeText(event.nativeEvent.text, "email")
+                    }
+                />
             </View>
-            <View style = {styles.inputGroup}>
-                <TextInput placeholder="Numero móvil"  onChange={(value) => setState({numeroCel: value})}/>
+            <View style={styles.inputGroup}>
+                <TextInput
+                    placeholder="Numero móvil"
+                    onChange={(event) =>
+                        handleChangeText(event.nativeEvent.text, "phone")
+                    }
+                />
             </View>
 
             <View>
-                <Button title="Crear usuario" onPress={() => addNewUser()}/>
+                <Button title="Crear usuario" onPress={() => addNewUser()} />
             </View>
         </ScrollView>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
@@ -70,12 +94,12 @@ const styles = StyleSheet.create({
         padding: 35,
     },
     inputGroup: {
-        flex:1,
-        padding:0,
+        flex: 1,
+        padding: 0,
         marginBottom: 15,
-        borderBottomWidth:1,
-        borderBottomColor: '#cccccc'
-    }
-})
+        borderBottomWidth: 1,
+        borderBottomColor: "#cccccc",
+    },
+});
 
-export default CreateUserScreen
+export default CreateUserScreen;
