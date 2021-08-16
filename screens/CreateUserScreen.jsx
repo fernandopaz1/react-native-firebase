@@ -45,7 +45,7 @@ const CreateUserScreen = () => {
                 email: state.email,
                 phone: state.phone,
             });
-            // alert('Guardado')
+            alert("Guardado");
         } catch (error) {
             console.log(error);
         }
