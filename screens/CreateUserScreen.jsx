@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import firebase from "../database/firebase";
 
-const CreateUserScreen = () => {
+const CreateUserScreen = (props) => {
     const initalState = {
         name: "",
         email: "",
@@ -46,6 +46,7 @@ const CreateUserScreen = () => {
                 phone: state.phone,
             });
             alert("Guardado");
+            props.navigation.navigate("UserList");
         } catch (error) {
             console.log(error);
         }

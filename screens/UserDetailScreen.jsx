@@ -1,12 +1,16 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React, { useEffect, useState } from "react";
+import { View, Text, ScrollView } from "react-native";
 
-const UserDetailScreen = () => {
-    return(
-        <View>
+const UserDetailScreen = (props) => {
+    return (
+        <ScrollView>
+            <Button
+                title="Volver"
+                onPress={() => props.navigation.navigate("UserList")}
+            />
             <Text>Users List</Text>
-        </View>
-    )
-}
+        </ScrollView>
+    );
+};
 
-export default UserDetailScreen
+export default UserDetailScreen;
