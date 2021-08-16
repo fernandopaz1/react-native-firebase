@@ -7,9 +7,9 @@ const UserList = (props) => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        firebase.db.collection("users").onSnapshot((querySnapshot) => {
+        firebase.db.collection("Users").onSnapshot((querySnapshot) => {
+            const users = [];
             querySnapshot.docs.forEach((doc) => {
-                console.log(doc.data());
                 const { name, email, phone } = doc.data();
                 users.push({
                     id: doc.id,
@@ -21,13 +21,30 @@ const UserList = (props) => {
             setUsers(users);
         });
     }, []);
+
     return (
         <ScrollView>
             <Button
                 title="Crear Usuario"
                 onPress={() => props.navigation.navigate("CreateUserScreen")}
             />
-            <Text>Users List</Text>
+            {users.map((user) => {
+                return (
+                    <ListItem key={user.id}>
+                        <ListItem.Chevron />
+                        <Avatar
+                            source={{
+                                uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+                            }}
+                            rounded
+                        />
+                        <ListItem.Content>{user.name}</ListItem.Content>
+                        <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
+
+                        <ListItem.Subtitle>{user.phone}</ListItem.Subtitle>
+                    </ListItem>
+                );
+            })}
         </ScrollView>
     );
 };
