@@ -5,6 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 // navigation container es un cotenedor de pantallas
 import { NavigationContainer } from "@react-navigation/native";
 
+
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 // esto devuelve un componenete llamado stack
@@ -20,14 +21,18 @@ function MyStack() {
     // devuelvo el componente Stack.Navigator y por cada pantalla que quiero agregar
     // pongo un Stack.Screen
     return (
-        <Stack.Navigator>
-            <Stack.Screen name="UserList" component={UserList} />
-            <Stack.Screen
-                name="CreateUserScreen"
+        <Stack.Navigator
+            initialRouteName="UserList">
+            <Stack.Screen name="UserList" 
+                options={{ title: "Users List" }}
+                component={UserList} 
+            />
+            <Stack.Screen name="CreateUserScreen"
+                options={{ title: "Create User" }}
                 component={CreateUserScreen}
             />
-            <Stack.Screen
-                name="UserDetailScreen"
+            <Stack.Screen name="UserDetailScreen"
+                options={{ title: "Details" }}
                 component={UserDetailScreen}
             />
         </Stack.Navigator>
