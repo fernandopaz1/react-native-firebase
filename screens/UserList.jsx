@@ -34,14 +34,16 @@ const UserList = (props) => {
                         <ListItem.Chevron />
                         <Avatar
                             source={{
-                                uri: "https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg",
+                                uri: "https://picsum.photos/128/128",
                             }}
                             rounded
                         />
-                        <ListItem.Content>{user.name}</ListItem.Content>
-                        <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
+                        <ListItem.Content>
+                            <ListItem.Title>{user.name}</ListItem.Title>
+                            <ListItem.Subtitle>{user.email}</ListItem.Subtitle>
 
-                        <ListItem.Subtitle>{user.phone}</ListItem.Subtitle>
+                            <ListItem.Subtitle>{user.phone}</ListItem.Subtitle>
+                        </ListItem.Content>
                     </ListItem>
                 );
             })}
