@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, View, TextInput, ScrollView, StyleSheet, Alert } from "react-native";
+import { Button, View, TextInput, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 import firebase from "../database/firebase";
 
 
@@ -11,12 +11,15 @@ const UserDetailScreen = (props) => {
         phone: '',
     })
 
+    const [loading, setLoading] = useState(true)
+
     const getUserById = async (id) => {
         const dbRef = firebase.db.collection("Users").doc(id);
         const doc = await dbRef.get();
         const user = doc.data();
         console.log(user);
         setState({...user, id: doc.id})
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -26,6 +29,12 @@ const UserDetailScreen = (props) => {
     const handleChangeText = (value, name) => {
         setState({ ...state, [name]: value });
     };
+
+    if (loading) {
+        return <View>
+            <ActivityIndicator size="large" color="#9e9e9e"/>
+        </View>
+    }
 
     return (
         <ScrollView style={styles.container}>
