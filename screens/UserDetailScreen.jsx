@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Button, View, TextInput, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
+import { Button, View, TextInput, ScrollView, StyleSheet, ActivityIndicator, Platform } from "react-native";
 import firebase from "../database/firebase";
+
 
 
 const UserDetailScreen = (props) => {
@@ -30,6 +31,33 @@ const UserDetailScreen = (props) => {
         setState({ ...state, [name]: value });
     };
 
+    const deteleteUser = async () => {
+        try {
+            const dbRef =  firebase.db.collection("Users").doc(props.route.params.userId)
+            await dbRef.delete()
+            props.navigation.navigate('UserList');
+        } catch (error) {
+            console.log(error)
+        } 
+    }
+
+    const openConfirmationAlert = () => {
+        console.log("Funcion llaamada")
+        if(Platform.OS ==='web'){
+            deteleteUser()
+            alert("Usuario Eliminado")
+        }else{
+            alert(
+                'Delete user',
+                'Are you sure?',
+                [ 
+                    {text: 'Yes', onPress: ()=> deteleteUser()},
+                    {text: 'No', onPress: ()=> console.log('cancelado')},
+                ]
+            )
+        }
+    }
+
     if (loading) {
         return <View>
             <ActivityIndicator size="large" color="#9e9e9e"/>
@@ -42,7 +70,7 @@ const UserDetailScreen = (props) => {
                 <TextInput
                     placeholder="User Name"
                     value={state.name}
-                    onChangeText={(event)=>handleChangeText(event.nativeEvent.text, "name")}/>
+                    onChangeText={(value)=>handleChangeText(value, "name")}/>
             </View>
             <View style={styles.inputGroup}>
                 <TextInput
@@ -60,7 +88,7 @@ const UserDetailScreen = (props) => {
             <Button
                 title="Update User"
                 color= "green"
-                onPress={()=> alert("actualizado")}
+                onPress={()=> console.log(state.name)}
             />
             </View>
             <View>
@@ -68,7 +96,7 @@ const UserDetailScreen = (props) => {
             <Button
                 title="Delete User"
                 color= "red"
-                onPress={()=> alert("eliminado")}
+                onPress={()=> openConfirmationAlert()}
             />
             </View>
         </ScrollView>
