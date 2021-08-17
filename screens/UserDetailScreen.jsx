@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, View, TextInput, ScrollView, StyleSheet, ActivityIndicator, Platform } from "react-native";
+import { Button, View, TextInput, ScrollView, StyleSheet, ActivityIndicator, Platform, Alert } from "react-native";
 import firebase from "../database/firebase";
 
 
@@ -60,7 +60,7 @@ const UserDetailScreen = (props) => {
             deteleteUser()
             alert("Usuario Eliminado")
         }else{
-            alert(
+            Alert.alert(
                 'Delete user',
                 'Are you sure?',
                 [ 
@@ -76,7 +76,7 @@ const UserDetailScreen = (props) => {
             updateUser()
             alert("Usuario Actualizado")
         }else{
-            alert(
+            Alert.alert(
                 'Update user',
                 'Are you sure?',
                 [ 
