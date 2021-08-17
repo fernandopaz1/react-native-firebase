@@ -41,8 +41,21 @@ const UserDetailScreen = (props) => {
         } 
     }
 
-    const openConfirmationAlert = () => {
-        console.log("Funcion llaamada")
+    const updateUser = async () => {
+        try {
+            const dbRef =  firebase.db.collection("Users").doc(props.route.params.userId)
+            await dbRef.set({
+                name: state.name,
+                email: state.email,
+                phone: state.phone,
+            })
+            props.navigation.navigate('UserList');
+        } catch (error) {
+            console.log(error)
+        } 
+    }
+
+    const openConfirmationAlertDelete = (msg) => {
         if(Platform.OS ==='web'){
             deteleteUser()
             alert("Usuario Eliminado")
@@ -52,6 +65,22 @@ const UserDetailScreen = (props) => {
                 'Are you sure?',
                 [ 
                     {text: 'Yes', onPress: ()=> deteleteUser()},
+                    {text: 'No', onPress: ()=> console.log('cancelado')},
+                ]
+            )
+        }
+    }
+
+    const openConfirmationAlertUpdate = () => {
+        if(Platform.OS ==='web'){
+            updateUser()
+            alert("Usuario Actualizado")
+        }else{
+            alert(
+                'Update user',
+                'Are you sure?',
+                [ 
+                    {text: 'Yes', onPress: ()=> updateUser()},
                     {text: 'No', onPress: ()=> console.log('cancelado')},
                 ]
             )
@@ -76,19 +105,19 @@ const UserDetailScreen = (props) => {
                 <TextInput
                     placeholder="User email"
                     value={state.email}
-                    onChangeText={(event)=>handleChangeText(event.nativeEvent.text, "email")}/>
+                    onChangeText={(value)=>handleChangeText(value, "email")}/>
             </View>
             <View style={styles.inputGroup}>
                 <TextInput
                     placeholder="Name Phrone"
                     value={state.phone}
-                    onChangeText={(event)=>handleChangeText(event.nativeEvent.text, "phone")}/>
+                    onChangeText={(value)=>handleChangeText(value, "phone")}/>
             </View>
             <View>
             <Button
                 title="Update User"
                 color= "green"
-                onPress={()=> console.log(state.name)}
+                onPress={()=> openConfirmationAlertUpdate()}
             />
             </View>
             <View>
@@ -96,7 +125,7 @@ const UserDetailScreen = (props) => {
             <Button
                 title="Delete User"
                 color= "red"
-                onPress={()=> openConfirmationAlert()}
+                onPress={()=> openConfirmationAlertDelete()}
             />
             </View>
         </ScrollView>

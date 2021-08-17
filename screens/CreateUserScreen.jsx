@@ -23,10 +23,6 @@ const CreateUserScreen = (props) => {
     };
 
     const addNewUser = async () => {
-        console.log(`Nombre ${state.name}`);
-        console.log(`email ${state.email}`);
-        console.log(`cel ${state.phone}`);
-        console.log(state.name);
         if (state.name === "") {
             alert("Por favor ingrese un nombre");
             return;
