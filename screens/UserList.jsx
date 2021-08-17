@@ -30,7 +30,15 @@ const UserList = (props) => {
             />
             {users.map((user) => {
                 return (
-                    <ListItem key={user.id}>
+                    <ListItem
+                        key={user.id}
+                        bottomDivider
+                        onPress={() =>
+                            props.navigation.navigate("UserDetailScreen", {
+                                userId: user.id,
+                            })
+                        }
+                    >
                         <ListItem.Chevron />
                         <Avatar
                             source={{
